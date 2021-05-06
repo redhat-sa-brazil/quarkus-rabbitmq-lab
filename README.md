@@ -63,10 +63,10 @@ Source code artifacts are available in *source* and *docker* directories.
 
 ### 2. Send message to Default Exchange <a name="demo-step-send-message-default"/>
 
-* We´ve created some **Rest Endpoints** to act as **producers**. Therefore, just *POST* a message on **http://localhost:8080/**. Example:
+* We´ve created some **Rest Endpoints** to act as **producers**. Therefore, just *POST* a message on **http://localhost:8080/rabbit**. Example:
 
   ```
-  http POST :8080/rabbit message=message1        vinny@marcfleury
+  http POST :8080/rabbit message=message1
   HTTP/1.1 200 OK
   Content-Length: 23
   Content-Type: application/json
