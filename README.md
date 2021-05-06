@@ -19,6 +19,7 @@ Source code artifacts are available in *source* and *docker* directories.
 0. [Start RabbitMQ](#demo-step-start-rabbitmq)
 1. [Start RabbitMQ Quarkus App](#demo-step-start-rabbitmq-quarkus-app)
 2. [Send message to Default Exchange](#demo-step-send-message-default)
+3. [Send Delayed message](#demo-step-send-delayed-message)
 
 ### 0. Start RabbitMQ <a name="demo-step-start-rabbitmq"/>
 
@@ -86,3 +87,29 @@ Source code artifacts are available in *source* and *docker* directories.
   ```
 
   * notice that we don´t have any *Exchange* information since it´s the default one;
+
+### 3. Send Delayed message <a name="demo-step-send-delayed-message"/>
+
+* Just *POST* a message on **http://localhost:8080/rabbit/delay**. Example:
+
+  ```
+  http POST :8080/rabbit/delay message=delayedmessage
+  HTTP/1.1 200 OK
+  Content-Length: 29
+  Content-Type: application/json
+
+  {
+    "message": "delayedmessage"
+  }
+  ```
+
+* If you go back to **RabbitMQ Quarkus App** console, the following message is expected showcasing a working *consumer*:
+
+  ```
+  Sending message to Delayed: {"message": "delayedmessage"}
+  Received message from
+  Exchange quarkus.exchange.delay
+  Message: {"message": "delayedmessage"}
+  ```
+
+  * notice that consumption takes much longer (10000 ms);
