@@ -49,7 +49,7 @@ public class RabbitMQSetup {
             channel.queueBind( QuarkusRabbitMQConstants.MESSAGE_PRIORITY_QUEUE_NAME,
                                 QuarkusRabbitMQConstants.MESSAGE_PRIORITY_EXCHANGE_NAME,
                                 QuarkusRabbitMQConstants.MESSAGE_PRIORITY_ROUTING_KEY );
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
