@@ -44,7 +44,7 @@ Source code artifacts are available in *source* and *docker* directories.
 
 * Navigate to **source/rabbitmq-quarkus-lab** and bootstrap RabbitMQ Quarkus App: `mvn quarkus:dev`
 
-  * if you the following exception comes up, please restart the application and the problem will be gone;
+  * if the following exception comes up, please restart the application and the problem will be gone;
 
     ```
     ... 47 more
