@@ -1,0 +1,9 @@
+# docker build -f Dockerfile.rabbitmq-v1 -t viniciusmartinez/rabbitmq-quarkus:1.0 .
+# docker run -it -p 15672:15672 -p 5672:5672 viniciusmartinez/rabbitmq-quarkus:1.0 
+
+FROM rabbitmq:3.7-management
+RUN apt-get -y update
+RUN apt-get -y install wget
+RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.9/rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez -P /opt/rabbitmq/plugins
+
+RUN rabbitmq-plugins enable --offline rabbitmq_delayed_message_exchange 
