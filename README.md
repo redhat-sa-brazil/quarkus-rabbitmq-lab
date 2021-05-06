@@ -20,6 +20,7 @@ Source code artifacts are available in *source* and *docker* directories.
 1. [Start RabbitMQ Quarkus App](#demo-step-start-rabbitmq-quarkus-app)
 2. [Send message to Default Exchange](#demo-step-send-message-default)
 3. [Send Delayed message](#demo-step-send-delayed-message)
+4. [Send Messages with Priority message](#demo-step-send-priority-message)
 
 ### 0. Start RabbitMQ <a name="demo-step-start-rabbitmq"/>
 
@@ -113,3 +114,44 @@ Source code artifacts are available in *source* and *docker* directories.
   ```
 
   * notice that consumption takes much longer (10000 ms);
+
+
+### 4. Send Messages with Priority <a name="demo-step-send-priority-message"/>
+
+* Just *POST* a message on **http://localhost:8080/rabbit/message-priority**. Example:
+
+  ```
+  http POST :8080/rabbit/message-priority
+  HTTP/1.1 200 OK
+  Content-Length: 0
+  ```
+
+* If you go back to **RabbitMQ Quarkus App** console, the following message is expected showcasing that we have three messages delivered to the *broker*
+
+  ```
+  Received message from
+  Exchange quarkus.exchange.delay
+  Message: {"message": "delayedmessage2"}
+  Sending Priority Messages
+  Message Sent: MESSAGE 1
+  Message Sent: MESSAGE 2
+  Message Sent: MESSAGE 3
+  ```
+
+* Now in order to consume these please, just execute a *GET* on **http://localhost:8080/rabbit/message-priority**
+
+  ```
+  http :8080/rabbit/message-priority
+  HTTP/1.1 200 OK
+  Content-Length: 0
+  ```
+
+* Switch back to **RabbitMQ Quarkus App** console and notice the messages consumption:
+
+  ```
+  Higher Priority: MESSAGE 3
+  Medium Priority: MESSAGE 2
+  Lower Priority: MESSAGE 1
+  ```
+
+  * notice that messages with higher priority are consumed firstly;
