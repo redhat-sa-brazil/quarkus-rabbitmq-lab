@@ -20,7 +20,9 @@ Source code artifacts are available in *source* and *docker* directories.
 
 ### 0. Start RabbitMQ <a name="demo-step-start-rabbitmq"/>
 
-* The easiest way to bootstrap **RabbitMQ** is using our custom *docker image*:  ` docker run -it -p 15672:15672 -p 5672:5672 viniciusmartinez/rabbitmq-quarkus:1.0`
+* The easiest way to bootstrap **RabbitMQ** is using our custom *docker image*:   
+
+  ` docker run -it -p 15672:15672 -p 5672:5672 viniciusmartinez/rabbitmq-quarkus:1.0`
 
   ```
   2021-05-06 17:03:31.703 [info] <0.702.0> Statistics database started.
