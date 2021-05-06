@@ -16,13 +16,15 @@ Source code artifacts are available in *source* and *docker* directories.
 ## Lab Script
 
 0. [Start RabbitMQ](#demo-step-start-rabbitmq)
-1. [Start rabbitmq-quarkus-lab app](#demo-step-start-rabbitmq)
+1. [Start RabbitMQ Quarkus App](#demo-step-start-rabbitmq-quarkus-app)
 
 ### 0. Start RabbitMQ <a name="demo-step-start-rabbitmq"/>
 
 * The easiest way to bootstrap **RabbitMQ** is using our custom *docker image*:   
 
-  ` docker run -it -p 15672:15672 -p 5672:5672 viniciusmartinez/rabbitmq-quarkus:1.0`
+  `docker run -it -p 15672:15672 -p 5672:5672 viniciusmartinez/rabbitmq-quarkus:1.0`
+
+* A similar output is expected:
 
   ```
   2021-05-06 17:03:31.703 [info] <0.702.0> Statistics database started.
@@ -34,7 +36,10 @@ Source code artifacts are available in *source* and *docker* directories.
    * rabbitmq_delayed_message_exchange
    completed with 4 plugins.
   ```
-  * a similar *output* is expected;
   * pleace notice that we added the [rabbitmq_delayed_message_exchange plugin](https://github.com/rabbitmq/rabbitmq-delayed-message-exchange)
 
 * You can access the admin console via [http://localhost:15672](http://localhost:15672) with *guest* for both *Username* and *Password*
+
+### 1. Start RabbitMQ Quarkus App <a name="demo-step-start-rabbitmq-quarkus-app"/>
+
+* Navigate to **source/rabbitmq-quarkus-lab** and bootstrap RabbitMQ Quarkus App: `mvn quarkus:dev`
