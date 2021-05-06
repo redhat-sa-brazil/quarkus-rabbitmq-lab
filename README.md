@@ -43,3 +43,10 @@ Source code artifacts are available in *source* and *docker* directories.
 ### 1. Start RabbitMQ Quarkus App <a name="demo-step-start-rabbitmq-quarkus-app"/>
 
 * Navigate to **source/rabbitmq-quarkus-lab** and bootstrap RabbitMQ Quarkus App: `mvn quarkus:dev`
+
+  * if you the following exception comes up, please restart the application and the problem will be gone;
+
+    ```
+    ... 47 more
+    Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'quarkus.queue.default' in vhost '/', class-id=60, method-id=20)
+    ```
