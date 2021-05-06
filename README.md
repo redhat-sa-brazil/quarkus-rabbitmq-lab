@@ -7,7 +7,8 @@ The following is intended to showcase how to integrate [Quarkus](https://quarkus
 ## Environment
 
 - [OpenJDK 11](https://openjdk.java.net/projects/jdk/11/)
-- [Doocker](https://www.docker.com/)
+- [Docker](https://www.docker.com/)
+- [HTTPie](https://httpie.io/)
 
 ## Building from Source
 
@@ -17,6 +18,7 @@ Source code artifacts are available in *source* and *docker* directories.
 
 0. [Start RabbitMQ](#demo-step-start-rabbitmq)
 1. [Start RabbitMQ Quarkus App](#demo-step-start-rabbitmq-quarkus-app)
+2. [Send message to Default Exchange](#demo-step-send-message-default)
 
 ### 0. Start RabbitMQ <a name="demo-step-start-rabbitmq"/>
 
@@ -44,9 +46,43 @@ Source code artifacts are available in *source* and *docker* directories.
 
 * Navigate to **source/rabbitmq-quarkus-lab** and bootstrap RabbitMQ Quarkus App: `mvn quarkus:dev`
 
+* A similar output is expected:
+
+  ```
+  2021-05-06 14:16:48,627 INFO  [io.quarkus] (Quarkus Main Thread) rabbitmq-quarkus-lab 1.0.0-SNAPSHOT on JVM (powered by Quarkus 1.13.3.Final) started in 2.038s. Listening on: http://localhost:8080
+  2021-05-06 14:16:48,627 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
+  2021-05-06 14:16:48,628 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, rabbitmq-client, resteasy, resteasy-jsonb, smallrye-context-propagation]
+  ```
+
   * if the following exception comes up, please restart the application and the problem will be gone;
 
     ```
     ... 47 more
     Caused by: com.rabbitmq.client.ShutdownSignalException: channel error; protocol method: #method<channel.close>(reply-code=404, reply-text=NOT_FOUND - no queue 'quarkus.queue.default' in vhost '/', class-id=60, method-id=20)
     ```
+
+### 2. Send message to Default Exchange <a name="demo-step-send-message-default"/>
+
+* We´ve created some **Rest Endpoints** to act as **producers**. Therefore, just *POST* a message on **http://localhost:8080/**. Example:
+
+  ```
+  http POST :8080/rabbit message=message1        vinny@marcfleury
+  HTTP/1.1 200 OK
+  Content-Length: 23
+  Content-Type: application/json
+
+  {
+     "message": "message1"
+  }
+  ```
+
+* If you go back to **RabbitMQ Quarkus App** console, the following message is expected showcasing a working *consumer*:
+
+  ```
+  Sending message to Default: {"message": "message1"}
+  Received message from
+  Exchange
+  Message: {"message": "message1"}
+  ```
+
+  * notice that we don´t have any *Exchange* information since it´s the default one;
